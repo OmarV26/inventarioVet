@@ -27,4 +27,6 @@ urlpatterns = [
     path("agregarProducto/", agregarProducto, name="agregarProducto"),
     path("productos/", productosView , name="productos"),
     path("index/", index, name="index"),
+    path("eliminarProducto/<int:id>/", eliminarProducto, name="eliminarProducto"),
+    path("agregarCategoria/", agregarCategoria, name="agregarCategoria"),
 ]

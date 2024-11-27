@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from gestorProductos.forms import ProductoForm
+from gestorProductos.forms import ProductoForm, CategoriaForm
 from django.http import HttpResponseRedirect
 from gestorProductos.models import Producto, Categoria
 from django.urls import reverse
 
 # Create your views here.
 
+
+# Crear un nuevo producto
 def agregarProducto(request):
     form = ProductoForm()
     if request.method == 'POST':
@@ -28,6 +30,29 @@ def agregarProducto(request):
     
 
     return render(request, 'agregarProducto.html', {'form': form, 'categorias': categorias})
+
+def agregarCategoria(request):
+    form = CategoriaForm()
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            # Crear la nueva categoría
+            nueva_categoria = Categoria.objects.create(
+                nombre=form.cleaned_data['nombre'],
+                descripcion=form.cleaned_data['descripcion'],
+            )
+            return HttpResponseRedirect(reverse('agregarProducto'))
+    else:
+        form = CategoriaForm()
+    return render(request, 'agregarCategoria.html', {'form': form})
+
+#eliminar un producto
+def eliminarProducto(request, id):
+    producto = Producto.objects.get(id=id)
+    producto.delete()
+    return HttpResponseRedirect(reverse('productos'))
+
+
 
 def productosView(request):
     productos = Producto.objects.all()
