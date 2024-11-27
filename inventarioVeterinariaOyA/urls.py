@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from gestorProductos.views import *
+from gestorUser.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path("usuarios/", include("gestorUser.urls")),
+    path("agregarProducto/", agregarProducto, name="agregarProducto"),
+    path("productos/", productosView , name="productos"),
+    path("index/", index, name="index"),
 ]

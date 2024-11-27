@@ -1,0 +1,41 @@
+{% extends 'base/base_productos.html' %}
+
+{% block titulo %}
+    Productos
+{% endblock titulo %}
+
+{% block sidebar %}
+    {% include 'base/base_sidebar.html' %}
+{% endblock sidebar %}
+
+{% block contenido %}
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Productos</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            {% block tablecontent %}
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                </tr>
+                    <tbody>
+                        {% for producto in productos %}
+                            <tr>
+                                <td>{{ producto.nombre }}</td>
+                                <td>{{ producto.descripcion }}</td>
+                                <td>{{ producto.precio }}</td>
+                                <td>{{ producto.categoria.nombre }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+            {% endblock tablecontent %}
+
+            <a href="{% url 'agregarProducto' %}" class="btn btn-primary">Agregar producto</a>
+
+    </div>
+{% endblock contenido %}

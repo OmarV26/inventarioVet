@@ -10,3 +10,6 @@ class SignUpView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
     success_message = "Usuario registrado correctamente"
+
+def index(request):
+    return render(request, 'index.html')
