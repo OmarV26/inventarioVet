@@ -21,4 +21,5 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("usuarios/", include("gestorUser.urls")),
 ]
