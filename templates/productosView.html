@@ -1,72 +1,74 @@
-{% extends 'base/base_productos.html' %}
-
-{% block titulo %}
-    Productos
-{% endblock titulo %}
-
-{% block sidebar %}
-    {% include 'base/base_sidebar.html' %}
-{% endblock sidebar %}
+{% extends 'base/base.html' %}
 
 {% block contenido %}
-    <div class="text-center">
-        <h1 class="h4 text-gray-900 mb-4">Productos</h1>
-    </div>
+<h1 class="h3 mb-2 text-gray-800">Productos</h1>
 
-    <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            {% block tablecontent %}
-                <tr>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Categoria</th>
-                    <th>Acciones</th>
-                </tr>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Tabla de productos</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                        <th>Acciones</th>
+                    </tr>
                 <tbody>
                     {% for producto in productos %}
-                        <tr>
-                            <td>{{ producto.nombre }}</td>
-                            <td>{{ producto.descripcion }}</td>
-                            <td>{{ producto.precio }}</td>
-                            <td>{{ producto.categoria.nombre }}</td>
-                            <td class="text-center">
-                                <a href="#" class="btn btn-primary">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <!-- Botón que abre el modal -->
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ producto.id }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.categoria.nombre }}</td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-primary">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <!-- Botón que abre el modal -->
+                            <button class="btn btn-danger" data-toggle="modal"
+                                data-target="#deleteModal{{ producto.id }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
 
-                        <!-- Modal de confirmación único para cada producto -->
-                        <div class="modal fade" id="deleteModal{{ producto.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ producto.id }}" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel{{ producto.id }}">Confirmar Eliminación</h5>
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar el producto <strong>{{ producto.nombre }}</strong>? Esta acción no se puede deshacer.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                        <a href="{% url 'eliminarProducto' producto.id %}" class="btn btn-danger">Eliminar</a>
-                                    </div>
+                    <!-- Modal de confirmación único para cada producto -->
+                    <div class="modal fade" id="deleteModal{{ producto.id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel{{ producto.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel{{ producto.id }}">
+                                        Confirmar Eliminación</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas eliminar el producto <strong>{{
+                                        producto.nombre }}</strong>? Esta acción no se puede deshacer.
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <a href="{% url 'eliminarProducto' producto.id %}"
+                                        class="btn btn-danger">Eliminar</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </tbody>
             </table>
-            {% endblock tablecontent %}
-
-            <a href="{% url 'agregarProducto' %}" class="btn btn-primary">Agregar producto</a>
+        </div>
     </div>
+</div>
+<a href="{% url 'index' %}" class="btn btn-danger ml-md-4">Volver</a>
+<a href="{% url 'agregarProducto' %}" class="btn btn-success ml-md-4">Agregar producto</a>
 {% endblock contenido %}
-

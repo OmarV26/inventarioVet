@@ -129,3 +129,17 @@ STATICFILES_DIRS = [STATIC_URL]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuración de rutas de autenticación
+
+LOGIN_REDIRECT_URL = '/index/' # Redirige a la página principal
+LOGOUT_REDIRECT_URL = '/'   # Redirige a la página principal
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
+}

@@ -23,10 +23,11 @@ from gestorUser.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("", index, name="index"),
+    path("index/", index, name="index"),
     path("usuarios/", include("gestorUser.urls")),
     path("agregarProducto/", agregarProducto, name="agregarProducto"),
     path("productos/", productosView , name="productos"),
-    path("index/", index, name="index"),
     path("eliminarProducto/<int:id>/", eliminarProducto, name="eliminarProducto"),
     path("agregarCategoria/", agregarCategoria, name="agregarCategoria"),
 ]
