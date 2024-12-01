@@ -1,5 +1,9 @@
 {% extends 'base/base.html' %}
 
+{% block titulo %}
+    Productos
+{% endblock titulo %}
+
 {% block contenido %}
 <h1 class="h3 mb-2 text-gray-800">Productos</h1>
 
@@ -24,10 +28,10 @@
                     <tr>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.descripcion }}</td>
-                        <td>{{ producto.precio }}</td>
+                        <td>${{ producto.precio }}</td>
                         <td>{{ producto.categoria.nombre }}</td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary">
+                            <a href="{% url 'editarProducto' producto.id %}" class="btn btn-primary">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <!-- Botón que abre el modal -->
@@ -51,8 +55,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ¿Estás seguro de que deseas eliminar el producto <strong>{{
-                                        producto.nombre }}</strong>? Esta acción no se puede deshacer.
+                                    ¿Estás seguro de que deseas eliminar el producto <strong>{{ producto.nombre }}</strong>?
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button"
