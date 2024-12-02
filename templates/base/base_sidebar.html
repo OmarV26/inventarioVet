@@ -24,9 +24,16 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{% url 'productos' %}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="bi bi-archive-fill"></i>
             <span>Productos</span></a>
     </li>
+    {% if user.is_superuser %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'categorias' %}">
+            <i class="bi bi-clipboard-data-fill"></i>
+            <span>Categorias</span></a>
+    </li>
+    {% endif %}
 
     {% if user.is_superuser %}
 

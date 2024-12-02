@@ -1,14 +1,32 @@
 {% extends "base/base.html" %}
-
+{% load static %}
 {% block titulo %}
-    INDEX 😎😎😎
+    index
 {% endblock %}
 
 {% block contenido %}
-    {% if user.is_superuser %}
-        <h1> Bienvenido {{ user.username }}</h1> <h1> Eres un superusuario</h1>
-    {% else %}
-        <h1> Bienvenido {{ user.username }}</h1> <h1> No eres un superusuario</h1>
-    {% endif %}
-    
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% static 'img/Diseño sin título.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Productos</h5>
+                        <p class="card-text">Para atender a tu mascota necesitas tener productos en stock.</p>
+                        <a href="{% url 'productos' %}" class="btn btn-primary">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+            {% if user.is_superuser %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{% static 'img/diseño.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Categorías</h5>
+                            <p class="card-text">Cada categoría debe tener un nombre y una descripción.</p>
+                            <a href="{% url 'categorias' %}" class="btn btn-primary">Ver categorías</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
 {% endblock %}

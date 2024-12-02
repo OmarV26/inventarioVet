@@ -41,10 +41,40 @@ def agregarCategoria(request):
                 nombre=form.cleaned_data['nombre'],
                 descripcion=form.cleaned_data['descripcion'],
             )
-            return HttpResponseRedirect(reverse('agregarProducto'))
+            return HttpResponseRedirect(reverse('categorias'))
     else:
         form = CategoriaForm()
     return render(request, 'agregarCategoria.html', {'form': form})
+
+def eliminarCategoria(request, id):
+    categoria = Categoria.objects.get(id=id)
+    categoria.delete()
+    return HttpResponseRedirect(reverse('categorias'))
+
+
+def editarCategoria(request, id):
+    try:
+        categoria = Categoria.objects.get(id=id)  # Obtener el producto por su ID
+    except Categoria.DoesNotExist:
+        return HttpResponseRedirect(reverse('categorias'))  # Redirigir si no existe
+
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            # Actualizar el producto
+            categoria.nombre = form.cleaned_data['nombre']
+            categoria.descripcion = form.cleaned_data['descripcion']
+            categoria.save()
+            return HttpResponseRedirect(reverse('categorias'))
+    else:
+        # Prellenar el formulario con los datos del producto
+        form = CategoriaForm(initial={
+            'nombre': categoria.nombre,
+            'descripcion': categoria.descripcion,
+        })
+
+    return render(request, 'editarCategoria.html', {'form': form, 'categoria': categoria})
+
 
 #eliminar un producto
 def eliminarProducto(request, id):
@@ -90,3 +120,13 @@ def productosView(request):
     categorias = Categoria.objects.all()
     data = {'productos': productos, 'categorias': categorias}
     return render(request, 'productosView.html', data)
+
+def categoriasView(request):
+    if request.user.is_superuser:
+        categorias = Categoria.objects.all()
+    else:
+        categorias = Categoria.objects.filter(user=request.user)
+    
+    categorias = Categoria.objects.all()
+    data = {'categorias': categorias}
+    return render(request, 'categoriasView.html', data)

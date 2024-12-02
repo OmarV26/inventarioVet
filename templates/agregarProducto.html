@@ -58,7 +58,7 @@
           <form method="POST" action="{% url 'agregarProducto' %}">
               {% csrf_token %}
               <div class="form-body">
-                  <div class="mb-3">
+                  <div class="mb-3 mt-3">
                       <label for="nombre" class="form-label">Nombre del Producto</label>
                       <input type="text" class="form-control" id="nombre" name="nombre" required>
                   </div>
@@ -79,10 +79,7 @@
                           {% endfor %}
                       </select>      
                   </div>
-                  <div class="mb-5">
-                    <a href="{% url 'agregarCategoria' %}" class="btn btn-success mt-3"><i class="bi bi-plus-circle"></i></a>
-                  </div>
-                  <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between mt-4">
                       <button type="submit" class="btn btn-primary">Agregar Producto</button>
                       <a href="{% url 'productos' %}" class="btn btn-secondary">Cancelar</a>
                   </div>
