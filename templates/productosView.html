@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.descripcion }}</td>
-                        <td>${{ producto.precio }}</td>
+                        <td>{{ producto.precio }}</td>
                         <td>{{ producto.categoria.nombre }}</td>
                         <td class="text-center">
                             <a href="{% url 'editarProducto' producto.id %}" class="btn btn-primary">

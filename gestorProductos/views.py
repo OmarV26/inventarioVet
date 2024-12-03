@@ -116,9 +116,13 @@ def productosView(request):
         productos = Producto.objects.all()
     else:
         productos = Producto.objects.filter(user=request.user)
-        
+
+    for producto in productos:
+        producto.precio = f"${int(producto.precio):,}".replace(",", ".")
+
     categorias = Categoria.objects.all()
     data = {'productos': productos, 'categorias': categorias}
+    
     return render(request, 'productosView.html', data)
 
 def categoriasView(request):
