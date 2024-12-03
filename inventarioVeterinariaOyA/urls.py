@@ -34,5 +34,6 @@ urlpatterns = [
     path("eliminarCategoria/<int:id>/", eliminarCategoria, name="eliminarCategoria"),
     path("categorias/", categoriasView, name="categorias"),
     path("editarCategoria/<int:id>/", editarCategoria, name="editarCategoria"),
-    
+    path("usuarios/", usuariosView, name="usuarios"),
+    path("perfil/", perfilview, name="perfil"),
 ]

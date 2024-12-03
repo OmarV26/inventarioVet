@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block titulo %}
+Perfil
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4">Perfil de Usuario</h2>
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+            <div class="card h-100">
+                <img src="{% static 'img/undraw_profile.svg' %}" class="card-img-top" alt="Foto de perfil">
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Información del Usuario</h5>
+                    <p class="card-text">
+                        <strong>Nombre de usuario:</strong> {{ user.username }}<br>
+                        <strong>Fecha de Ingreso:</strong> {{ user.date_joined|date:"d/m/Y" }}<br>
+                        <strong>Tipo de Usuario:</strong>
+                        {% if user.is_superuser %}
+                        Administrador
+                        {% else %}
+                        Usuario normal
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

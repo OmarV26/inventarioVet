@@ -4,7 +4,7 @@ from rest_framework.reverse import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 @login_required
@@ -17,3 +17,9 @@ class SignUpView(SuccessMessageMixin, CreateView):
     template_name = "registration/signup.html"
     success_message = "Usuario registrado correctamente"
 
+def usuariosView(request):
+    auth_user = User.objects.all()
+    return render(request, 'usuarios.html', {'auth_user': auth_user})
+
+def perfilview(request):
+    return render(request, 'perfil.html')
